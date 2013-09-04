@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>WP Content Blocks - Prototype</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- pure css framework for basic styling  -->
+        <!-- <link rel="stylesheet" href="css/pure.min.css"> -->
+        <!-- custom webfonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+        <!-- page styling -->
+        <link rel="stylesheet" href="css/style.css">
+
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+    </head>
+    <body>
+    <aside>
+    	<h2>WP Content Blocks - Prototype</h2>
+    	<p>This is a quick prototype for the Content Blocks workflow, based on the discussion from CEUX on #Wordpress-ui group.</p>
+    </aside>
+
+    <section>
+    	<h2>Add New Post</h2>
+
+		<div id="content"></div>
+
+    </section>
+
+    <script type="text/template" id="post-title">
+    	<input type="text" name="post_title" value="" placeholder="<%= post_title %>" autocomplete="off">
+    </script>
+    
+    <script type="text/template" id="post-block">
+    	<<%= block_tag %>>
+    		<%= block_content %>
+    	</% block_tag %>
+    </script>
+
+        <!-- javascript at the footer of the document -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/json2.js"></script>
+        <script src="js/underscore-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

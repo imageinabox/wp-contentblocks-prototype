@@ -1,0 +1,51 @@
+body {
+  background: #eeeeee;
+  font-family: 'Open Sans', 'Arial', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #222222;
+}
+body * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 150px;
+  padding: 12px;
+  background: #222222;
+  color: #a2a2a2;
+}
+aside h1,
+aside h2,
+aside h3 {
+  color: #ffffff;
+}
+h2 {
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 29px;
+  padding: 9px 15px 4px 0;
+}
+p {
+  font-size: 14px;
+  line-height: 18px;
+}
+section {
+  width: 100%;
+  padding: 0 300px 0 170px;
+  margin: 10px 20px 0 2px;
+}
+section #content {
+  display: block;
+  width: 100%;
+  border: 1px solid #dedede;
+  color: #555;
+  background-color: #fff;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+}
