@@ -39,13 +39,26 @@ section {
   padding: 0 300px 0 170px;
   margin: 10px 20px 0 2px;
 }
-section #content {
+#content {
   display: block;
   width: 100%;
+  padding: 20px;
   border: 1px solid #dedede;
   color: #555;
   background-color: #fff;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
   -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+}
+#content .wp-block {
+  outline: none;
+}
+#post-title {
+  padding: 3px 8px;
+  font-size: 1.7em;
+  line-height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  margin: 1px 0 5px 0;
 }

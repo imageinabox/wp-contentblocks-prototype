@@ -8,8 +8,8 @@ $(function(){
   post.Data = Backbone.Model.extend({
     defaults: {
       title: 'Your answer here',
-      content: '',
-      meta: '',
+      content: {},
+      meta: {},
     }
   });
 
@@ -26,9 +26,84 @@ $(function(){
     model: post.Block
   })
 
-  post.blocks = new post.Blocks();
+  post.blocks = new post.Blocks({
+    id:1,
+    tag: 'div',
+    content: 'Type your content here...'
+  });
 
-  
+  // the blocks view
+  post.BlockView = Backbone.View.extend({
+    tagName: 'div',
+    className: 'content-block',
+    template: _.template($('#post-block').html()),
+
+    events: {
+      'click .remove': 'destroy'
+    },
+
+    initialize: function(){
+      _.bindAll(this, 'render');
+      this.model.bind('destroy', this.unrender);
+      this.render();
+    },
+    render: function(){
+      this.$el.html(this.template(
+        {
+          block_tag: this.model.get('tag'),
+          block_content: this.model.get('content')
+        }
+      ));
+      
+      return this;
+    },
+    unrender: function(){
+      console.log('unrender');
+      $(this.el).remove();
+    },
+    destroy: function(){
+      // console.log('destroy');
+      this.model.destroy();
+    },
+  });
+
+  // the post view
+  post.View = Backbone.View.extend({
+    el: '#container',
+    template: _.template($('#post-template').html()),
+
+    events: {
+      'click #add-block' : 'addBlock',
+      'change #post-title': 'updateTitle',
+    },
+
+    initialize: function(){
+      _.bindAll(this, 'render', 'addBlock', 'updateTitle');
+      this.wrapper = this.$el.find('#content');
+      this.render();
+    },
+    render: function(){
+      // initialize the post model
+      post.thePost = new post.Data();
+      this.wrapper.html(this.template({post_title: post.thePost.get('title')}));
+    },
+    addBlock: function(){
+      console.log('add block menu');
+
+      var block = new post.Block();
+      post.blocks.add(block)
+
+      var newBlock = new post.BlockView({model:block});
+      this.wrapper.append(newBlock.render().el);
+    },
+    updateTitle:function(e){
+      post.thePost.set({title: $(e.target).val()});
+      console.log('uptated title: '+ post.thePost.get('title'));
+    }
+
+  });
+
+  post.view = new post.View();
 
   // // var answer = new app.Answer();
 

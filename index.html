@@ -28,16 +28,21 @@
     <section>
     	<h2>Add New Post</h2>
 
-		<div id="content"></div>
+		<div id="container">
+			<div id="content"></div>
+			<a href="#" id="add-block">Add Content</a>
+		</div>
 
     </section>
 
-    <script type="text/template" id="post-title">
-    	<input type="text" name="post_title" value="" placeholder="<%= post_title %>" autocomplete="off">
+    <script type="text/template" id="post-template">
+    	<input type="text" name="post_title" id="post-title" value="" placeholder="<%= post_title %>" autocomplete="off">
+    	<div id="content-blocks"></div>
     </script>
-    
+
     <script type="text/template" id="post-block">
-    	<<%= block_tag %>>
+    	<span class="remove">remove</span>
+    	<<%= block_tag %> class="wp-block" contenteditable="true">
     		<%= block_content %>
     	</% block_tag %>
     </script>
