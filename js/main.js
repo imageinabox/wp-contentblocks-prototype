@@ -7,7 +7,7 @@ $(function(){
   // the post model - contains all the data of the post
   post.Data = Backbone.Model.extend({
     defaults: {
-      title: 'Your answer here',
+      title: 'Your title here',
       content: {},
       meta: {},
     }
