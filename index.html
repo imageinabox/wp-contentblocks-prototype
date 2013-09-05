@@ -7,12 +7,12 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <!-- pure css framework for basic styling  -->
-        <!-- <link rel="stylesheet" href="css/pure.min.css"> -->
         <!-- custom webfonts -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
         <!-- page styling -->
         <link rel="stylesheet" href="css/style.css">
+        <!-- Dashicons -->
+        <link rel="stylesheet" href="css/dashicons.css">
 
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,29 +20,124 @@
 
     </head>
     <body>
+
+    <header id="adminbar">
+    <ul class="leftmenu">
+        <li><a href="#"><span class="ab-icon dashicons-wordpress"></span></a></li>
+        <li><a href="#">Site Name</a></li>
+        <li><a href="#"><span class="ab-icon dashicons-update"></span>2</a></li>
+        <li><a href="#"><span class="ab-icon dashicons-admin-comments"></span>10</a></li>
+        <li><a href="#"><span class="ab-icon dashicons-plus-small"></span>New</a></li>
+    </ul>
+
+    <a href="#" id="admin-user">Howdly, Admin <img src="http://lorempixel.com/16/16/people" id="wp-avatar"/></a>
+    </header>
+
+    <!-- beggining of content -->
+    <div id="wpwrap">
+    
     <aside>
-    	<h2>WP Content Blocks - Prototype</h2>
-    	<p>This is a quick prototype for the Content Blocks workflow, based on the discussion from CEUX on #Wordpress-ui group.</p>
+<!--     	<h2>WP Content Blocks - Prototype</h2>
+    	<p>This is a quick prototype for the Content Blocks workflow, based on the discussion from CEUX on #Wordpress-ui group.</p> -->
+
+        <ul class="adminmenu">
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-gauge"></div>
+                    <div class="wp-menu-name">Dashboard</div>
+                </a>
+            </li>
+        </ul>
+        <ul class="adminmenu">
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-admin-post"></div>
+                    <div class="wp-menu-name">Posts</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-admin-media"></div>
+                    <div class="wp-menu-name">Media</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-admin-page"></div>
+                    <div class="wp-menu-name">Pages</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-admin-comments"></div>
+                    <div class="wp-menu-name">Comment</div>
+                </a>
+            </li>
+        </ul>
+        <ul class="adminmenu">
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-admin-appearance"></div>
+                    <div class="wp-menu-name">Appearance</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-admin-plugins"></div>
+                    <div class="wp-menu-name">Plugins</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-admin-users"></div>
+                    <div class="wp-menu-name">Users</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-admin-tools"></div>
+                    <div class="wp-menu-name">Tools</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="wp-menu-image dashicons-admin-settings"></div>
+                    <div class="wp-menu-name">Settings</div>
+                </a>
+            </li>
+        </ul>
     </aside>
+
+    <div id="helper-links">
+        <a href="#" id="help">Help <span class="dashicons dashicons-arr-down"></span></a>
+        <a href="#" id="screen-options">Screen Options <span class="dashicons dashicons-arr-down"></span></a>
+    </div>
 
     <section>
     	<h2>Add New Post</h2>
 
 		<div id="container">
 			<div id="content"></div>
-			<a href="#" id="add-block">Add Content</a>
+			<a href="#" id="add-block"><span class="dashicons dashicons-plus-small"></span>Add Content</a>
 		</div>
 
     </section>
 
+    <!-- end of content -->
+    </div>
+
+    <!-- templates -->
     <script type="text/template" id="post-template">
     	<input type="text" name="post_title" id="post-title" value="" placeholder="<%= post_title %>" autocomplete="off">
     	<div id="content-blocks"></div>
     </script>
 
     <script type="text/template" id="post-block">
-    	<span class="remove">remove</span>
-    	<<%= block_tag %> class="wp-block" contenteditable="true">
+        <div class="ctrlbar">
+            <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
+        	<% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
+    	</div>
+        <<%= block_tag %> class="wp-block" contenteditable="true">
     		<%= block_content %>
     	</% block_tag %>
     </script>
