@@ -228,7 +228,7 @@ aside#metabox{
 
 #contentbox{
     width: 100%;
-    padding: 0 320px 0 170px;
+    padding: 0 320px 20px 170px;
     // margin: 10px 20px 0 2px;
 }
 
@@ -243,6 +243,8 @@ aside#metabox{
     .box-shadow(inset 0 1px 2px rgba(0,0,0,0.07));
 
     .content-block{
+        width: 100%;
+        display: block;
         position: relative;
         border-bottom: 1px dashed @light;
         padding: 15px 0;
@@ -254,20 +256,19 @@ aside#metabox{
             padding: 5px;
             top: 0;
             right: 0;
-            background: light;
+            // background: @light;
         }
 
         .remove, .move{
             // position: absolute;
             // top: 0;
             color: @gray;
-            cursor: pointer;
             &:hover{
                 color: @dark;
             }
         }
         // .remove{right: 0;}
-        // .move{left: 0;}
+        .move{cursor:move;}
     }
 
     // the mais block editable area
@@ -278,9 +279,10 @@ aside#metabox{
 }
 
 #add-block{
+    display: inline-block;
+    padding: 10px 0;
     font-family: @text;
     font-size: 18px;
-    display: inline-block;
     color: @gray;
     text-decoration: none;
     &:hover{color: @dark;}
@@ -301,4 +303,4 @@ aside#metabox{
     margin: 1px 0 5px 0;
 }
 
-#content-blocks{border-bottom: 1px dashed @light;}
+#content-blocks{border-top: 1px dashed @light; margin: 0; padding: 0; list-style: none;}

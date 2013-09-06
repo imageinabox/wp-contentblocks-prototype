@@ -117,7 +117,9 @@
     	<h2>Add New Post</h2>
 
 		<div id="container">
-			<div id="content"></div>
+			<div id="content">
+            <div id="content-blocks"></div>        
+            </div>
 			<a href="#" id="add-block"><span class="dashicons dashicons-plus-small"></span>Add Content</a>
 		</div>
 
@@ -138,7 +140,6 @@
     <!-- templates -->
     <script type="text/template" id="post-template">
     	<input type="text" name="post_title" id="post-title" value="" placeholder="<%= post_title %>" autocomplete="off">
-    	<div id="content-blocks"></div>
     </script>
 
     <script type="text/template" id="post-block">
@@ -147,7 +148,7 @@
         	<% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
     	</div>
         <<%= block_tag %> class="wp-block" contenteditable="true">
-    		<%= block_content %>
+    		block <%= wp_id %>, <%= block_content %>
     	</% block_tag %>
     </script>
 
@@ -156,6 +157,9 @@
         <script src="js/json2.js"></script>
         <script src="js/underscore-min.js"></script>
         <script src="js/backbone-min.js"></script>
+        <!-- jquery UI -->
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <!-- main script -->
         <script src="js/main.js"></script>
     </body>
 </html>
