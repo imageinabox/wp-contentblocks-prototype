@@ -2,6 +2,67 @@
 
 $(function(){
 
+  // the object that contains all the post blocks type:
+  var customBlocks = {
+    text: {
+      name: 'Text',
+      objType: 'wp-text',
+      icon: 'dashicons-format-aside'
+    },
+    image: {
+      name: 'Image',
+      objType: 'wp-image',
+      icon: 'dashicons-format-image'
+    },
+    gallery: {
+      name: 'Gallery',
+      objType: 'wp-gallery',
+      icon: 'dashicons-format-gallery'
+    },
+    audio: {
+      name: 'Audio',
+      objType: 'wp-audio',
+      icon: 'dashicons-format-audio'
+    },
+    video: {
+      name: 'Video',
+      objType: 'wp-video',
+      icon: 'dashicons-format-video'
+    },
+    code: {
+      name: 'Code',
+      objType: 'wp-code',
+      icon: 'dashicons-format-status'
+    },
+    tweet: {
+      name: 'Tweet',
+      objType: 'wp-tweet',
+      icon: 'dashicons-twitter1'
+    },
+    quote: {
+      name: 'Quote',
+      objType: 'wp-quote',
+      icon: 'dashicons-format-quote'
+    },
+    embed: {
+      name: 'Embed',
+      objType: 'wp-embed',
+      icon: 'dashicons-welcome-add-page'
+    }
+  }
+
+  console.log(customBlocks);
+
+  var blockTpl ='';
+
+  _.each(customBlocks, function(blk){
+    blockTpl += _.template($('#blocks-template').html(), {name: blk.name, objType: blk.objType, icon: blk.icon});
+  });
+
+  // console.log(blockTpl);
+  $('#blocksSelect').append(blockTpl);
+
+  // the post namespace
   var post = {};
 
   // the post model - contains all the data of the post
@@ -20,6 +81,7 @@ $(function(){
       tag: 'div',
       remove: true,
       move: true,
+      type: 'wp-text',
       content: 'Type here'
     }
   });
@@ -52,6 +114,7 @@ $(function(){
         {
           wp_id: this.model.get('wp_id'),
           block_tag: this.model.get('tag'),
+          block_type: this.model.get('type'),
           block_content: this.model.get('content'),
           remove: this.model.get('remove'),
           move: this.model.get('move')
@@ -78,14 +141,16 @@ $(function(){
     template: _.template($('#post-template').html()),
 
     events: {
-      'click #add-block' : 'addBlock',
+      'click #add-block' : 'blockMenu',
+      'click .customBlock' : 'addBlock',
       'change #post-title': 'updateTitle',
     },
 
     initialize: function(){
-      _.bindAll(this, 'render', 'addBlock', 'updateTitle');
+      _.bindAll(this, 'render', 'addBlock', 'blockMenu','updateTitle');
       this.container = $('#content');
       this.wrapper = $('#content-blocks');
+      this.addBtn = $('#blocksSelect');
       
       // counter for the views
       this.counter = 0;
@@ -120,20 +185,26 @@ $(function(){
       var initView = new post.BlockView({model:initBlock});
       this.wrapper.append(initView.render().el);
     },
-    addBlock: function(e){
-
+    blockMenu: function(e){
       // prevent default behavior
       e.preventDefault();
-      
+
+      this.addBtn.addClass('active');
+    },
+    addBlock: function(e){
+      var objType = $(e.currentTarget).data('type');
+
       // creates a new instance of Block model
       this.counter++;
       var block = new post.Block({
-        wp_id: this.counter
+        wp_id: this.counter,
+        type: objType
       });
       
       // add to collection
       post.blocks.add(block);
-      
+      this.addBtn.removeClass('active');
+
       // creates a new instance of BlockView and binds the new model to it
       var newBlock = new post.BlockView({model:block});
       this.wrapper.append(newBlock.render().el);

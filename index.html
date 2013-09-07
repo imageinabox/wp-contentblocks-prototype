@@ -120,7 +120,9 @@
 			<div id="content">
             <div id="content-blocks"></div>        
             </div>
-			<a href="#" id="add-block"><span class="dashicons dashicons-plus-small"></span>Add Content</a>
+
+            <a href="#" id="add-block"><span class="dashicons dashicons-plus-small"></span>Add Content</a>
+            <div id="blocksSelect"><span class="arrow-left"></span></div>
 		</div>
 
     </section>
@@ -139,7 +141,11 @@
 
     <!-- templates -->
     <script type="text/template" id="post-template">
-    	<input type="text" name="post_title" id="post-title" value="" placeholder="<%= post_title %>" autocomplete="off">
+        <input type="text" name="post_title" id="post-title" value="" placeholder="<%= post_title %>" autocomplete="off">
+    </script>
+
+    <script type="text/template" id="blocks-template">
+        <div class="customBlock" data-type="<%= objType %>"><span class="block-image dashicons <%= icon %>"></span><%= name %></div>	
     </script>
 
     <script type="text/template" id="post-block">
@@ -147,8 +153,8 @@
             <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
         	<% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
     	</div>
-        <<%= block_tag %> class="wp-block" contenteditable="true">
-    		block <%= wp_id %>, <%= block_content %>
+        <<%= block_tag %> class="wp-block <%= block_type %>" contenteditable="true">
+    		block <%= wp_id %> (block type: <%= block_type %>), <%= block_content %>
     	</% block_tag %>
     </script>
 

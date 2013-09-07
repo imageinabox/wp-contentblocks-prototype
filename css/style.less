@@ -232,6 +232,8 @@ aside#metabox{
     // margin: 10px 20px 0 2px;
 }
 
+#container{position: relative;}
+
 // where the magic happens
 #content{
     display: block;
@@ -304,3 +306,49 @@ aside#metabox{
 }
 
 #content-blocks{border-top: 1px dashed @light; margin: 0; padding: 0; list-style: none;}
+
+#blocksSelect{
+    position: absolute;
+    bottom: -10px;
+    left: 160px;
+    z-index: 999;
+    display: none;
+    width: 370px;
+    padding: 20px;
+    background: @dark;
+    color: @light;
+    &.active{display: block;}
+
+    .arrow-left{
+        position: absolute;
+        bottom: 15px;
+        left: -15px;
+        display: block;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-right: 15px solid @dark;
+    }
+
+    .customBlock{
+        display: block;
+        float: left;
+        width: 100px;
+        margin: 5px;
+        padding: 10px;
+        font-size: 14px;
+        text-transform: uppercase;
+        text-align: center;
+        cursor: pointer;
+        background: lighten(@dark,5%);
+        &:hover{color: @blue; background: @black;}
+        .block-image{
+            color: @gray;
+            display: block;
+            width: 36px;
+            height: 36px;
+            margin: 0 auto 10px;
+            &:hover{color: @blue;}
+            &:before{font-size: 36px; margin: 0 auto;}
+        }
+    }
+}
