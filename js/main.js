@@ -162,7 +162,7 @@ $(function(){
         handle: '.move',
         containment: '#content',
         connectWith: ".content-blocks",
-      }).disableSelection();
+      });
 
     },
     render: function(){
