@@ -5,6 +5,8 @@ My personal prototyping repo for help developing Content Blocks feature for Word
 
 ###Updates so far:
 
+- 09/09/2013: added initial templates for each content block type;
+- 09/07/2013: added initial UI for content block selection;
 - 09/06/2013: added Sortable jQuery UI plugin, with basic functionality to sort blocks;
 - 09/05/2013: added initial files;
 
@@ -12,6 +14,7 @@ My personal prototyping repo for help developing Content Blocks feature for Word
 
 - Create a collection of Block models, each model is a different Block type, and their respective view's templates;
 - Improve sortable functions to handle side-by-side content blocks, columns, etc;
-- Develop the UI for choosing Which Content Block the user want to insert;
 - implement editor capability for the Blocks (suggestion: etch.js plugin);
 - UI improvements (handles, transitions, etc);
+- Create a Backbone collection of block models;
+- Develop a way to handle columns (inspiration: Squarespace UI for page editing);
