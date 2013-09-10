@@ -5,6 +5,7 @@ My personal prototyping repo for help developing Content Blocks feature for Word
 
 ###Updates so far:
 
+- 09/10/2013: create file to make it a WP plugin. 
 - 09/10/2013: added etch.js plugin for content block formating;
 - 09/09/2013: added initial templates for each content block type;
 - 09/07/2013: added initial UI for content block selection;
@@ -18,3 +19,4 @@ My personal prototyping repo for help developing Content Blocks feature for Word
 - Develop a way to handle columns (inspiration: Squarespace UI for page editing);
 - Create a Backbone collection of block models;
 - UI improvements (handles, transitions, etc);
+- get CSS to load correctly within the plugin.
