@@ -268,4 +268,8 @@ $(function(){
 
   post.view = new post.View();
 
+  $('#modal-close').click(function(){
+    $('#modal-init').hide();
+  });
+
 });

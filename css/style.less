@@ -431,3 +431,34 @@ aside#metabox{
         }
     }
 }
+
+// modal styles
+#modal-init{
+    display: table;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    text-align: center;
+    background: fadeout(#000, 50%);
+}
+
+#modal-content{
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    width: 500px;
+    margin: 15% 0 0;
+    padding: 30px;
+    background: @white;
+}
+#modal-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
