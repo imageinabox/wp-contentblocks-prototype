@@ -91,7 +91,8 @@ $(function(){
       remove: true,
       move: true,
       type: 'wp-text',
-      content: 'Type here'
+      title: 'Text',
+      body: 'Type here'
     }
   });
 
@@ -127,7 +128,7 @@ $(function(){
           wp_id: this.model.get('wp_id'),
           block_tag: this.model.get('tag'),
           block_type: this.model.get('type'),
-          block_content: this.model.get('content'),
+          block_content: this.model.get('body'),
           remove: this.model.get('remove'),
           move: this.model.get('move')
         }
@@ -146,7 +147,7 @@ $(function(){
 
   // the post view
   post.View = Backbone.View.extend({
-    el: '#container',
+    el: '#post',
     template: _.template($('#post-template').html()),
 
     events: {
@@ -154,7 +155,10 @@ $(function(){
       'click .customBlock' : 'addBlock',
       'change #post-title': 'updateTitle',
       'click #permalink-edit': 'updatePermalink',
-      'keypress #post-permalink': 'savePermalink'
+      'keypress #post-permalink': 'savePermalink',
+      'click #save-button': 'savePost',
+      // this is where etch.js works
+      'mousedown .editable': 'editableClick'
     },
 
     initialize: function(){
@@ -246,9 +250,21 @@ $(function(){
         $('#post-permalink').hide();
         $('#permalink-edit').show();
       }
-    }
+    },
+    savePost: function(){
+      alert('Here we need to get all the data from post.Blocks collection, serialize it and save on the database. The post.Data model will hold the content when the post is loaded, then it should pass it to the post.Blocks collection to rebuild the content blocks.');
+    },
+    // here is where etch.js works
+    editableClick: etch.editableInit,
 
   });
+
+  // removing "save" button from etch.js classes
+  etch.config.buttonClasses = {
+    'default': ['save'],
+    'all': ['bold', 'italic', 'underline', 'unordered-list', 'ordered-list', 'link', 'clear-formatting'],
+    'title': ['bold', 'italic', 'underline']
+  };
 
   post.view = new post.View();
 
