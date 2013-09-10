@@ -1,6 +1,6 @@
 // app quiz example
 
-$(function(){
+jQuery(function($){
 
   // the object that contains all the post blocks type:
   var customBlocks = {

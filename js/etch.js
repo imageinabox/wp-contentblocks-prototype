@@ -1,4 +1,4 @@
-(function() {
+(function($) {
   'use strict';
     
   var models = {},
@@ -363,4 +363,4 @@
   }
     
   window.etch = etch;
-})();
+})(jQuery);
