@@ -141,21 +141,123 @@
 
     <!-- templates -->
     <script type="text/template" id="post-template">
-        <input type="text" name="post_title" id="post-title" value="" placeholder="<%= post_title %>" autocomplete="off">
+        <input type="text" name="post_title" id="post-title" value="" placeholder="<%= post_title %>">
+        <div id="the-permalink" class="light"><strong>Permalink: </strong>http://yoursite.com/<input type="text" name="post_permalink" id="post-permalink" value="<%= post_permalink %>"><span id="permalink-text"><%= post_permalink %></span><button id="permalink-edit" class="button button-small">Edit</button></div>
     </script>
 
     <script type="text/template" id="blocks-template">
         <div class="customBlock" data-type="<%= objType %>"><span class="block-image dashicons <%= icon %>"></span><%= name %></div>	
     </script>
 
-    <script type="text/template" id="post-block">
+    <!-- templates for every content block -->
+    <!-- text -->
+    <script type="text/template" id="wp-text">
         <div class="ctrlbar">
             <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
         	<% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
     	</div>
         <<%= block_tag %> class="wp-block <%= block_type %>" contenteditable="true">
-    		block <%= wp_id %> (block type: <%= block_type %>), <%= block_content %>
+    		<%= block_content %>
     	</% block_tag %>
+    </script>
+
+    <!-- image -->
+    <script type="text/template" id="wp-image">
+        <div class="ctrlbar">
+            <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
+            <% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
+        </div>
+        <<%= block_tag %> class="wp-block <%= block_type %>">
+            <h2>Add an Image</h2>
+            <p>Drop here an image or click the button to upload.</p>
+            <p><button class="button button-primary button-xlarge">Upload Image</button>
+        </% block_tag %>   
+    </script>
+    
+    <!-- gallery -->
+    <script type="text/template" id="wp-gallery">
+        <div class="ctrlbar">
+            <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
+            <% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
+        </div>
+        <<%= block_tag %> class="wp-block <%= block_type %>">
+            <h2>Add a Gallery</h2>
+            <p>Drop here your images or click the button to upload.</p>
+            <p><button class="button button-primary button-xlarge">Upload Images</button>
+        </% block_tag %>   
+    </script>
+
+    <!-- audio -->
+    <script type="text/template" id="wp-audio">
+        <div class="ctrlbar">
+            <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
+            <% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
+        </div>
+        <<%= block_tag %> class="wp-block <%= block_type %>">
+            <h2>Add an Audio File</h2>
+            <p>Drop here your file or click the button to upload.</p>
+            <p><button class="button button-primary button-xlarge">Upload Audio</button>
+        </% block_tag %>   
+    </script>
+
+    <!-- video -->
+    <script type="text/template" id="wp-video">
+        <div class="ctrlbar">
+            <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
+            <% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
+        </div>
+        <<%= block_tag %> class="wp-block <%= block_type %>">
+            <h2>Add a Video File</h2>
+            <p>Drop here your file or click the button to upload.</p>
+            <p><button class="button button-primary button-xlarge">Upload Video</button>
+        </% block_tag %>   
+    </script>
+
+    <!-- code -->
+    <script type="text/template" id="wp-code">
+        <div class="ctrlbar">
+            <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
+            <% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
+        </div>
+        <<%= block_tag %> class="wp-block <%= block_type %>">
+            <pre><code contenteditable="true"><%= block_content %></pre></code>
+        </% block_tag %>
+    </script>
+
+    <!-- code -->
+    <script type="text/template" id="wp-tweet">
+        <div class="ctrlbar">
+            <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
+            <% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
+        </div>
+        <<%= block_tag %> class="<%= block_type %>">
+            <h2><span class="title-image dashicons dashicons-twitter1"></span>Insert your tweet url</h2>
+            <input type="text" class="input" value="<%= block_content %>">
+        </% block_tag %>
+    </script>
+
+    <!-- quote -->
+    <script type="text/template" id="wp-quote">
+        <div class="ctrlbar">
+            <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
+            <% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
+        </div>
+        <<%= block_tag %> class="<%= block_type %>">
+            <h2><span class="title-image dashicons dashicons-format-quote"></span>Insert your quote here</h2>
+            <input type="text" class="input" value="<%= block_content %>">
+        </% block_tag %>
+    </script>
+
+    <!-- embed -->
+    <script type="text/template" id="wp-embed">
+        <div class="ctrlbar">
+            <% if(remove){ %> <span class="dashicons dashicons-no remove"></span> <% } %>
+            <% if(move){ %> <span class="dashicons dashicons-menu move"></span> <% } %>
+        </div>
+        <<%= block_tag %> class="<%= block_type %>">
+            <h2><span class="title-image dashicons dashicons-welcome-add-page"></span>Insert your embed code here</h2>
+            <textarea class="input"><%= block_content %></textarea>
+        </% block_tag %>
     </script>
 
         <!-- javascript at the footer of the document -->
