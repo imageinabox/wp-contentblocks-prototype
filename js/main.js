@@ -51,16 +51,24 @@ $(function(){
     }
   }
 
-  console.log(customBlocks);
-
+  // creating the content blocks selector menu 
   var blockTpl ='';
 
   _.each(customBlocks, function(blk){
     blockTpl += _.template($('#blocks-template').html(), {name: blk.name, objType: blk.objType, icon: blk.icon});
   });
 
-  // console.log(blockTpl);
   $('#blocksSelect').append(blockTpl);
+
+
+  // custom function to transform a title in a slug - from http://stackoverflow.com/questions/1053902/how-to-convert-a-title-to-a-url-slug-in-jquery
+  function convertToSlug(Text) {
+      return Text
+          .toLowerCase()
+          .replace(/[^\w ]+/g,'')
+          .replace(/ +/g,'-')
+          ;
+  }
 
   // the post namespace
   var post = {};
@@ -69,6 +77,7 @@ $(function(){
   post.Data = Backbone.Model.extend({
     defaults: {
       title: 'Your title here',
+      permalink: '',
       content: {},
       meta: {},
     }
@@ -97,19 +106,22 @@ $(function(){
   post.BlockView = Backbone.View.extend({
     tagName: 'div',
     className: 'content-block',
-    template: _.template($('#post-block').html()),
+    // template: _.template($('#wp-text').html()),
 
     events: {
       'click span.remove': 'destroy',
-      'mousedown .wp-block': 'addFocus',
     },
 
     initialize: function(){
       _.bindAll(this, 'render', 'unrender');
       this.model.bind('destroy', this.unrender);
+
+      this.template = _.template($('#'+this.model.get('type')).html());
+
       this.render();
     },
     render: function(){
+
       this.$el.html(this.template(
         {
           wp_id: this.model.get('wp_id'),
@@ -129,9 +141,6 @@ $(function(){
     destroy: function(){
       // console.log('destroy');
       this.model.destroy();
-    },
-    addFocus: function(e){
-      $(e.target).focus();
     }
   });
 
@@ -144,6 +153,8 @@ $(function(){
       'click #add-block' : 'blockMenu',
       'click .customBlock' : 'addBlock',
       'change #post-title': 'updateTitle',
+      'click #permalink-edit': 'updatePermalink',
+      'keypress #post-permalink': 'savePermalink'
     },
 
     initialize: function(){
@@ -160,15 +171,22 @@ $(function(){
       // initial state of sortable plugin
       this.wrapper.sortable({
         handle: '.move',
-        containment: '#content',
+        // containment: '#container',
         connectWith: ".content-blocks",
+        placeholder: "blocks-placeholder",
+        start: function(e, ui){
+          ui.placeholder.height(ui.item.outerHeight());
+        }
       });
 
     },
     render: function(){
       // initialize the post model
       post.thePost = new post.Data();
-      this.container.prepend(this.template({post_title: post.thePost.get('title')}));
+      this.container.prepend(this.template({
+        post_title: post.thePost.get('title'),
+        post_permalink: post.thePost.get('permalink')
+      }));
 
       // insert first content block
       this.counter++;
@@ -189,7 +207,7 @@ $(function(){
       // prevent default behavior
       e.preventDefault();
 
-      this.addBtn.addClass('active');
+      this.addBtn.toggleClass('active');
     },
     addBlock: function(e){
       var objType = $(e.currentTarget).data('type');
@@ -211,8 +229,23 @@ $(function(){
 
     },
     updateTitle:function(e){
-      post.thePost.set({title: $(e.target).val()});
-      console.log('uptated title: '+ post.thePost.get('title'));
+      var value = $(e.target).val();
+      post.thePost.set({title: value, permalink: convertToSlug(value)});
+      console.log('uptated title: '+ post.thePost.get('title') + ', permalink: '+ post.thePost.get('permalink'));
+      $('#post-permalink').val(post.thePost.get('permalink'));
+      $('#permalink-text').html(post.thePost.get('permalink'));
+    },
+    updatePermalink:function(){
+      $('#permalink-text, #permalink-edit').hide();
+      $('#post-permalink').show();
+    },
+    savePermalink: function(e){
+      if(e.which == 13) { //execute on enter
+        post.thePost.set({permalink: convertToSlug($(e.target).val())});
+        $('#permalink-text').html(post.thePost.get('permalink')).show()
+        $('#post-permalink').hide();
+        $('#permalink-edit').show();
+      }
     }
 
   });

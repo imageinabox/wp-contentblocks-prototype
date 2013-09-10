@@ -29,6 +29,30 @@ p{
     line-height: 18px;
 }
 
+// buttons
+.button{
+    background: lighten(@light,10%);
+    border: 1px solid @gray;
+    padding: 2px 12px;
+    color: @dark;
+    text-decoration: none;
+    .rounded-corners(3px);
+    -webkit-box-shadow: inset 0 1px 0 fadeout(@white, 50%), 0 1px 0 fadeout(@dark, 75%);
+            box-shadow: inset 0 1px 0 fadeout(@white, 50%), 0 1px 0 fadeout(@dark, 75%);
+
+    &:hover{background: @light;}
+    &.button-primary{
+        color: @white;
+        background: lighten(@blue, 15%);
+        border: 1px solid @blue;
+        &:hover{background: lighten(@blue,10%);}
+    }
+
+    &.button-large{font-size: 120%;}
+    &.button-xlarge{font-size: 150%;}
+    &.button-small{font-size: 80%;}
+}
+
 // admin bar
 #adminbar{
     position: fixed;
@@ -249,7 +273,7 @@ aside#metabox{
         display: block;
         position: relative;
         border-bottom: 1px dashed @light;
-        padding: 15px 0;
+        padding: 15px 5px;
         &:hover .ctrlbar{display: block;}
 
         .ctrlbar{
@@ -273,11 +297,50 @@ aside#metabox{
         .move{cursor:move;}
     }
 
-    // the mais block editable area
+    .blocks-placeholder{
+        display: block;
+        min-height: 50px;
+        background: @light;
+        border: 1px dashed @gray;
+    }
+    .ui-sortable-helper{
+        border: 1px dashed @gray;
+        background: @white;
+        .opacity(90);
+    }
+
+    // the block editable area
     .wp-block{
         outline: none;
         min-height: 200px;
     }
+
+    .title-image{font-size: 30px; width: 30px;}
+}
+
+// styles for each content block
+.wp-image, .wp-gallery, .wp-audio, .wp-video{
+    display: block;
+    width: 100%;
+    border: 2px dashed @gray;
+    background: @light;
+    text-align: center;
+
+    h2{margin-top: 20px;}
+}
+
+.wp-code code{
+    outline: none;
+    color: @blue;
+}
+
+.input{
+    width: 100%;
+    font-size: 1.4rem;
+    color: @gray;
+    border: 1px dashed @gray;
+    padding: 5px;
+    outline: none;
 }
 
 #add-block{
@@ -303,6 +366,20 @@ aside#metabox{
     outline: none;
     border: none;
     margin: 1px 0 5px 0;
+}
+#the-permalink{
+    color: @gray;
+    font-size: 12px;
+    line-height: 100%;
+    margin: 5px 0;
+
+    .button{margin-left: 10px;}
+}
+#post-permalink{
+    display: none;
+    outline: none;
+    border: 1px solid @light;
+    color: @gray;    
 }
 
 #content-blocks{border-top: 1px dashed @light; margin: 0; padding: 0; list-style: none;}
@@ -340,14 +417,16 @@ aside#metabox{
         text-align: center;
         cursor: pointer;
         background: lighten(@dark,5%);
-        &:hover{color: @blue; background: @black;}
+        &:hover{
+            color: @blue; background: @black;
+            .block-image {color: @blue;}
+        }
         .block-image{
             color: @gray;
             display: block;
             width: 36px;
             height: 36px;
             margin: 0 auto 10px;
-            &:hover{color: @blue;}
             &:before{font-size: 36px; margin: 0 auto;}
         }
     }
