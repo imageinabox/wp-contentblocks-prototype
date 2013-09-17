@@ -11,27 +11,28 @@
 
 if( ! class_exists( 'WPCEUXContentBlocks' ) ) {
 	class WPCEUXContentBlocks {
-	
+		var $page;
+		
 		public function __construct() {  
+			
 			wp_register_script( 'ceux-etch-js' , plugins_url( '/js/etch.js' , __FILE__ ) , array( 'jquery' , 'json2' , 'underscore' , 'backbone' , 'jquery-ui' ) , '1' , true );
 			wp_register_script( 'ceux-main-js' , plugins_url( '/js/main.js' , __FILE__ ) , array( 'etch' ) , true );
+			wp_register_style( 'ceux-etch-css', plugins_url( '/css/etch.css' , __FILE__ ) );
+			wp_register_style( 'ceux-style-css', plugins_url( '/css/style.css' , __FILE__ ) );
 			
 			add_action( 'admin_menu' , array( $this , 'addMenu' ) );
-			add_action( 'wp_enqueue_scripts' , array( $this , 'registerStyles' ) );
 		}  
 		
 		public function addMenu() {
-			$page = add_posts_page( __( 'Add new (Prototype)' ) , __( 'Add new (Prototype)' ) , 'read' , 'add-new-prototype-page' , array( $this , 'displayPage' ) );
-			add_action( 'admin_print_scripts-' . $page , array( $this , 'displayScripts' ) );
+			$this->page = add_posts_page( __( 'Add new (Prototype)' ) , __( 'Add new (Prototype)' ) , 'read' , 'add-new-prototype-page' , array( $this , 'displayPage' ) );
+			add_action( 'admin_print_styles' , array( $this , 'displayStyles' ) );
+			add_action( 'admin_print_scripts' , array( $this , 'displayScripts' ) );
 		}
 		
-		public function registerStyles() {
-			wp_register_style( 'ceux-etch-css', plugins_url( '/css/etch.css' , __FILE__ ) );
-			wp_register_style( 'ceux-style-css', plugins_url( '/css/style.css' , __FILE__ ) );
+		public function displayStyles() {
 			wp_enqueue_style( 'ceux-etch-css' );
 			wp_enqueue_style( 'ceux-style-css' );
 		}
-		
 		public function displayScripts() {
 			wp_enqueue_script( 'ceux-etch-js' );
 			wp_enqueue_script( 'ceux-main-js' );
@@ -41,7 +42,7 @@ if( ! class_exists( 'WPCEUXContentBlocks' ) ) {
 			?>
 			<section id="post">
 				<section id="contentbox">
-					<h2>Add New Post</h2>
+					<h2>Add New Post <?php echo $this->page; ?></h2>
 
 					<div id="container">
 						<div id="content">
